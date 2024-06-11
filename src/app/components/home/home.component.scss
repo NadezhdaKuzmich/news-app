@@ -1,0 +1,151 @@
+.container {
+  max-width: 1200px;
+  padding: 40px 30px;
+  margin: auto;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.search-label {
+  font-weight: 600;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  margin: 10px 0 40px;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  width: 20px;
+  height: 20px;
+  color: #666;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 600px;
+  font-family: "Montserrat";
+  font-size: 16px;
+  color: #575757;
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  box-shadow: 0 6px 12px #f3f3f3;
+  padding: 13px 12px 13px 60px;
+  transition: border-color 0.3s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-color: #3f51b5;
+  }
+}
+
+.results {
+  width: 100%;
+  font-weight: 600;
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 40px;
+
+  p {
+    margin: 0 0 5px;
+  }
+}
+
+.articles {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 47px 24px;
+}
+
+.mat-mdc-card {
+  display: flex;
+  flex-direction: column;
+  width: calc((100% / 3) - 24px);
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 4px 12px #f3f3f3;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px #c4c4c4;
+  }
+
+  .mat-mdc-card-header {
+    flex-grow: 1;
+    padding: 25px 20px;
+
+    .mat-mdc-card-subtitle {
+      font-weight: 300;
+      font-size: 14px;
+      color: #868686;
+      margin-bottom: 24px;
+
+      .date-icon {
+        width: 14px;
+        color: #666;
+        vertical-align: bottom;
+        margin-right: 6px;
+      }
+    }
+
+    .mat-mdc-card-title {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1.2;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  .mat-mdc-card-image {
+    height: 217px;
+    object-fit: cover;
+  }
+
+  .mat-mdc-card-content {
+    font-size: 16px;
+    flex-grow: 1;
+    padding: 0 20px;
+  }
+
+  .mat-mdc-card-actions {
+    padding: 20px 20px 25px;
+    margin-top: auto;
+
+    .mdc-button {
+      font-size: 16px;
+      letter-spacing: 0;
+      padding: 0;
+      cursor: pointer;
+
+      &:hover {
+        color: #3a75dc;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .mat-mdc-card {
+    width: calc((100% / 2) - 24px);
+  }
+}
+
+@media (max-width: 600px) {
+  .mat-mdc-card {
+    width: 100%;
+  }
+}

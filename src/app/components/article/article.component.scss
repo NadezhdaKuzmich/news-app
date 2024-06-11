@@ -1,0 +1,28 @@
+.image-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-height: 245px;
+  overflow: hidden;
+  background: #ffffff;
+    z-index: -1;
+}
+.article-detail-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.article-detail-container {
+  position: relative;
+  padding: 150px 16px 0;
+}
+
+mat-card {
+  margin-bottom: 16px;
+}
+
+.back-button {
+  margin-top: 16px;
+}

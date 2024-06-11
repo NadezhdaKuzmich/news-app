@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="search-container">
+    <label class="search-label">Filter by keywords</label>
+    <div class="search-field">
+      <mat-icon svgIcon="custom-search-icon" class="search-icon">
+        search
+      </mat-icon>
+      <input
+        matInput
+        class="search-input"
+        [(ngModel)]="filterText"
+        (input)="filterArticles()"
+        placeholder="Search..."
+      />
+    </div>
+  </div>
+  <div class="results">
+    <p>Results: {{ filteredArticles?.length }}</p>
+  </div>
+  <div class="articles">
+    <mat-card *ngFor="let article of filteredArticles">
+      <img mat-card-image [src]="article['image_url']" alt="Article Image" />
+      <mat-card-header>
+        <mat-card-subtitle>
+          <mat-icon svgIcon="custom-date-icon" class="date-icon"></mat-icon>
+          {{ article["published_at"] | dateSuffix }}
+        </mat-card-subtitle>
+        <mat-card-title
+          [innerHTML]="article.title | highlight : filterText | sanitizeHtml"
+        >
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content
+        [innerHTML]="
+          (article.summary | highlight : filterText | slice : 0 : 100) + '...'
+            | sanitizeHtml
+        "
+      >
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button class="link" (click)="navigateToArticle(article.id)">
+          Read more →
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
