@@ -1,27 +1,58 @@
-# NewsApp
+# News SPA with Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.10.
+This project is a Single Page Application (SPA) built with Angular, using Angular Material for UI components. It fetches articles from the SpaceFlightNewsAPI and allows users to filter articles by keywords.
+
+## Features
+
+- Display a list of articles with titles and short descriptions.
+- Click on an article card to navigate to a detail page with the full article description.
+- Filter articles dynamically by entering keywords in a search bar.
+- Highlight matched keywords in search results, prioritizing matches in article titles.
+
+## Screenshots
+
+![Home Page](./screenshots/home-page.png)
+_Home Page - List of Articles_
+
+![Article Detail Page](./screenshots/article-page.png)
+_Article Page_
+
+## Technologies Used
+
+- Angular
+- Angular Material
+- RxJS (for reactive programming)
+- SCSS (CSS preprocessor)
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+### Usage
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To interact with the Space News SPA, follow these steps:
 
-## Build
+1. **Browse Articles:**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+   - Upon opening the application, you will land on the homepage displaying a list of articles.
+   - Each article is represented by a card containing its title and a brief description (up to 100 characters).
 
-## Running unit tests
+2. **View Article Details:**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   - Click on any article card to navigate to its detailed description page.
+   - The detailed page will display the full title and description of the selected article.
 
-## Running end-to-end tests
+3. **Filter Articles:**
+   - Use the search bar provided at the top of the homepage to filter articles by keywords.
+   - Enter keywords related to article titles or descriptions into the search bar.
+   - The system will display all articles that contain at least one of the entered keywords.
+   - Matched keywords in article titles will be highlighted in yellow for easy identification.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### API Reference
 
-## Further help
+This project utilizes the SpaceFlightNewsAPI to fetch articles dynamically. Below is the link to the SpaceFlightNewsAPI documentation for further details:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- [SpaceFlightNewsAPI Documentation](https://spaceflightnewsapi.net/)
+
+### Contact
+Project Link: [https://main--my-angular-news-app.netlify.app/](https://main--my-angular-news-app.netlify.app/)
