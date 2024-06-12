@@ -55,4 +55,4 @@ This project utilizes the SpaceFlightNewsAPI to fetch articles dynamically. Belo
 - [SpaceFlightNewsAPI Documentation](https://spaceflightnewsapi.net/)
 
 ### Contact
-Project Link: [https://main--my-angular-news-app.netlify.app/](https://main--my-angular-news-app.netlify.app/)
+Project Link: [https://my-angular-news-app.netlify.app/](https://my-angular-news-app.netlify.app/)
