@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'dateSuffix',
 })
 export class DateSuffixPipe implements PipeTransform {
-  transform(date: string): string | null {
+  transform(date: Date): string | null {
     if (date) {
       const datePipe = new DatePipe('en-US');
       const day = datePipe.transform(date, 'd');

@@ -1,6 +1,6 @@
 .container {
-  max-width: 1200px;
-  padding: 40px 30px;
+  max-width: 1340px;
+  padding: 40px 20px;
   margin: auto;
 }
 
@@ -59,21 +59,21 @@ mat-form-field {
 
 .articles {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 47px 24px;
+  gap: 47px 45px;
 }
 
 .mat-mdc-card {
   display: flex;
   flex-direction: column;
-  width: calc((100% / 3) - 24px);
+  width: calc((100% - 90px) / 3);
   background: #fff;
   border-radius: 5px;
   border: 1px solid #eaeaea;
   box-shadow: 0 4px 12px #f3f3f3;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-4px);
@@ -81,7 +81,6 @@ mat-form-field {
   }
 
   .mat-mdc-card-header {
-    flex-grow: 1;
     padding: 25px 20px;
 
     .mat-mdc-card-subtitle {
@@ -99,6 +98,7 @@ mat-form-field {
     }
 
     .mat-mdc-card-title {
+      min-height: 88px;
       font-weight: 400;
       font-size: 24px;
       line-height: 1.2;
@@ -117,7 +117,7 @@ mat-form-field {
 
   .mat-mdc-card-content {
     font-size: 16px;
-    flex-grow: 1;
+    flex-grow: 0;
     padding: 0 20px;
   }
 
@@ -139,12 +139,20 @@ mat-form-field {
 }
 
 @media (max-width: 1024px) {
+  .articles {
+    gap: 27px 24px;
+  }
+
   .mat-mdc-card {
-    width: calc((100% / 2) - 24px);
+    width: calc((100% - 24px) / 2);
   }
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding: 20px 15px;
+  }
+
   .mat-mdc-card {
     width: 100%;
   }

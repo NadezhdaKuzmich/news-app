@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
+import { Article } from '../../types/interfaces';
 
 @Component({
   selector: 'app-article',
@@ -8,7 +9,7 @@ import { ArticleService } from '../../services/article.service';
   styleUrls: ['./article.component.scss'],
 })
 export class ArticleComponent implements OnInit {
-  article: any;
+  article: Article | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -17,10 +18,10 @@ export class ArticleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const articleId = this.route.snapshot.paramMap.get('id');
-    this.articleService.getArticles().subscribe((data) => {
-      this.article = data.results.find((a: any) => a.id == articleId);
-    });
+    const id = this.route.snapshot.paramMap.get('id');
+    this.articleService
+      .getArticleById(id)
+      .subscribe((article) => (this.article = article));
   }
 
   goBack() {

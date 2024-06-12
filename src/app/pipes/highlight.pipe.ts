@@ -4,11 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'highlight',
 })
 export class HighlightPipe implements PipeTransform {
-  // transform(value: string, keyword: string): any {
-  //   if (!keyword) return value;
-  //   const re = new RegExp(keyword, 'gi');
-  //   return value.replace(re, '<span class="highlight">$&</span>');
-  // }
   transform(value: string, keyword: string): string {
     if (!keyword) return value;
     const escapedKeyword = keyword.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -18,7 +13,6 @@ export class HighlightPipe implements PipeTransform {
       .join('|');
     const regex = new RegExp(`(${keywords})`, 'gi');
 
-    // Replace matched keywords with highlighted version
     return value.replace(
       regex,
       (match) => `<span class="highlight">${match}</span>`

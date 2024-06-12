@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../../services/article.service';
 import { Router } from '@angular/router';
+import { Observable, combineLatest, map, startWith } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { Article } from '../../types/interfaces';
 
 @Component({
   selector: 'app-home',
@@ -8,60 +11,58 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  articles: any | undefined;
-  filteredArticles: any | undefined;
-  filterText: string = '';
+  articles$: Observable<Article[]> | undefined;
+  filteredArticles$: Observable<Article[]> | undefined;
+  searchControl: FormControl = new FormControl('');
 
   constructor(private articleService: ArticleService, private router: Router) {}
 
   ngOnInit(): void {
-    this.articleService.getArticles().subscribe((data) => {
-      this.articles = data.results;
-      this.filteredArticles = this.articles;
-    });
-  }
+    this.articles$ = this.articleService.getArticles();
 
-  filterArticles() {
-    if (this.filterText) {
-      const keywords = this.filterText
-        .toLowerCase()
-        .split(' ')
-        .filter((k) => k.length > 0);
-
-      this.filteredArticles = this.articles
-        ?.map((article: any) => {
-          const titleMatches = this.countMatches(article.title, keywords);
-          const descriptionMatches = this.countMatches(
-            article.summary,
-            keywords
-          );
-
-          return {
-            ...article,
-            titleMatches,
-            descriptionMatches,
-            totalMatches: titleMatches + descriptionMatches,
-          };
-        })
-        .filter((article: any) => article.totalMatches > 0)
-        .sort(
-          (a: any, b: any) =>
-            b.titleMatches - a.titleMatches || b.totalMatches - a.totalMatches
-        );
-    } else {
-      this.filteredArticles = this.articles;
-    }
-  }
-
-  countMatches(text: string, keywords: string[]): number {
-    return keywords.reduce(
-      (count, keyword) =>
-        count + (text.toLowerCase().includes(keyword) ? 1 : 0),
-      0
+    this.filteredArticles$ = combineLatest([
+      this.articles$,
+      this.searchControl.valueChanges.pipe(startWith('')),
+    ]).pipe(
+      map(([articles, searchTerm]) => this.filterArticles(articles, searchTerm))
     );
   }
 
-  navigateToArticle(id: string): void {
+  private filterArticles(articles: Article[], searchTerm: string): Article[] {
+    if (!searchTerm) {
+      return articles;
+    }
+
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    const keywordArray = lowerSearchTerm.split(' ').filter((word) => word);
+
+    return articles
+      .map((article) => ({
+        ...article,
+        priority: this.calculatePriority(article, keywordArray),
+      }))
+      .filter((article) => article.priority > 0)
+      .sort((a, b) => b.priority - a.priority);
+  }
+
+  private calculatePriority(article: Article, keywords: string[]): number {
+    let priority = 0;
+
+    const titleLower = article.title.toLowerCase();
+    const summaryLower = article.summary.toLowerCase();
+
+    for (let keyword of keywords) {
+      if (titleLower.includes(keyword)) {
+        priority += 2;
+      } else if (summaryLower.includes(keyword)) {
+        priority += 1;
+      }
+    }
+
+    return priority;
+  }
+
+  navigateToArticle(id: number): void {
     this.router.navigate(['/article', id]);
   }
 }
