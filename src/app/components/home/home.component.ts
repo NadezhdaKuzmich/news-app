@@ -3,7 +3,7 @@ import { ArticleService } from '../../services/article.service';
 import { Router } from '@angular/router';
 import { Observable, combineLatest, map, startWith } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { Article } from '../../types/interfaces';
+import { Article, FetchedData } from '../../types/interfaces';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import { Article } from '../../types/interfaces';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  articles$: Observable<Article[]> | undefined;
+  articles$: Observable<FetchedData> | undefined;
   filteredArticles$: Observable<Article[]> | undefined;
   searchControl: FormControl = new FormControl('');
 
@@ -24,7 +24,9 @@ export class HomeComponent implements OnInit {
       this.articles$,
       this.searchControl.valueChanges.pipe(startWith('')),
     ]).pipe(
-      map(([articles, searchTerm]) => this.filterArticles(articles, searchTerm))
+      map(([articles, searchTerm]) =>
+        this.filterArticles(articles.results, searchTerm)
+      )
     );
   }
 
